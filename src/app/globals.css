@@ -7,7 +7,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-mona-sans), -apple-system, "Segoe UI", Roboto, Ubuntu,
+    Cantarell, "Noto Sans", sans-serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -46,33 +47,47 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* The Missy Project brand tokens */
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-yellow-pale: var(--brand-yellow-pale);
+  --color-brand-blue-pale: var(--brand-blue-pale);
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  /* Brand palette extracted from themissyproject.org */
+  --brand-blue: #3f88c5; /* headings, nav links, links, CONTACT button bg */
+  --brand-navy: #15313f; /* dark section backgrounds, on-yellow text */
+  --brand-yellow: #ffd522; /* DONATE button, badges, pill labels */
+  --brand-yellow-pale: #fffae8; /* stats bar background */
+  --brand-blue-pale: #cfe8ef; /* light-blue card / panel backgrounds */
+
+  --background: #ffffff;
+  --foreground: var(--brand-navy);
+  --card: #ffffff;
+  --card-foreground: var(--brand-navy);
+  --popover: #ffffff;
+  --popover-foreground: var(--brand-navy);
+  --primary: var(--brand-blue);
+  --primary-foreground: #ffffff;
+  --secondary: var(--brand-yellow);
+  --secondary-foreground: var(--brand-navy);
+  --muted: var(--brand-blue-pale);
+  --muted-foreground: #4a6572;
+  --accent: var(--brand-yellow);
+  --accent-foreground: var(--brand-navy);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: var(--brand-blue);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --radius: 0.75rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -84,14 +99,14 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+  --background: var(--brand-navy);
+  --foreground: #ffffff;
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: var(--brand-blue);
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -127,4 +142,49 @@
   html {
     @apply font-sans;
   }
+  h1 {
+    font-weight: 700;
+    font-size: 68px;
+    line-height: 1.27;
+    color: var(--brand-blue);
+  }
+  h2 {
+    font-weight: 700;
+    font-size: 42.67px;
+    line-height: 1.27;
+    color: var(--brand-blue);
+  }
+  p {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}
+
+/* Scroll-reveal fade-up, matched to the source site's
+   `.atlas-animate-reveal` / `.revealed` mechanism (see BEHAVIORS.md). */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px) rotate3d(-1, 0, 0, 15deg);
+    transition-property: opacity, transform;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+  }
+  .reveal.revealed {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  .reveal-from-top {
+    transform: translateY(-40px) rotate3d(1, 0, 0, 15deg);
+  }
+  .reveal-from-top.revealed {
+    transform: translateY(0px);
+  }
+}
+
+/* Decorative flower marks — subtle scroll/pointer-linked rotation
+   (source CSS: `.spinning-flower img { transition: transform .2s linear; }`) */
+.spinning-flower img {
+  transition: transform 0.2s linear;
+  will-change: transform;
 }

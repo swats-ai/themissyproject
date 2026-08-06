@@ -1,20 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const monaSans = localFont({
+  src: [
+    { path: "../../public/fonts/mona-sans-regular.woff2", weight: "400", style: "normal" },
+    { path: "../../public/fonts/mona-sans-500.woff2", weight: "500", style: "normal" },
+    { path: "../../public/fonts/mona-sans-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-mona-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Website Clone",
-  description: "Pixel-perfect website clone",
+  title: "Home | The Missy Project",
+  description:
+    "Early detection of brain aneurysms can save lives. Join us in raising awareness, funding research, and providing free screenings to prevent tragedies and protect families.",
+  icons: {
+    icon: "/seo/favicon.png",
+  },
+  openGraph: {
+    title: "Home | The Missy Project",
+    description:
+      "Early detection of brain aneurysms can save lives. Join us in raising awareness, funding research, and providing free screenings to prevent tragedies and protect families.",
+    url: "https://www.themissyproject.org",
+  },
 };
 
 export default function RootLayout({
@@ -25,9 +37,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${monaSans.variable} h-full antialiased`}
+      // Browser extensions (e.g. Google Tag Assistant) inject attributes like
+      // data-tag-assistant-prod-present onto <html> before React hydrates,
+      // which otherwise trips a harmless hydration-mismatch warning.
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <Header />
+        <main className="flex flex-1 flex-col">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
