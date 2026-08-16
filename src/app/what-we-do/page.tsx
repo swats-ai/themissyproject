@@ -257,8 +257,8 @@ export default function WhatWeDoPage() {
             </p>
             <Image
               src="/images/wwd-next-steps.png"
-              alt="Step 1: Telephone Interview, Step 2: Sign Consent Screening Form, Step 3: Schedule MRI Screening, Step 4: Followup w/ Brain & Spine Institute"
-              width={1600}
+              alt="Step 1: Telephone Interview, Step 2: Sign Consent Screening Form, Step 3: Schedule MRI Screening"
+              width={1169}
               height={600}
               className="mt-6 h-auto w-full"
             />
