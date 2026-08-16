@@ -2,12 +2,37 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { Container } from "@/components/container";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { cn } from "@/lib/utils";
 
 const yellowButtonClasses =
   "inline-flex items-center justify-center rounded-xl border border-brand-yellow bg-brand-yellow px-5 py-3 text-base font-bold uppercase tracking-[0.8px] text-brand-navy transition-colors duration-200 ease-out hover:brightness-95";
+
+/**
+ * The three real donation processors, presented as one cohesive "choose how
+ * you'd like to give" panel instead of three scattered buttons. Each links
+ * out to the live checkout the client already uses; no payment UI is built
+ * here. Order mirrors the live site: card → Square → PayPal/Venmo.
+ */
+const donationMethods = [
+  {
+    label: "Credit or Debit Card",
+    description: "Secure one-time card payment",
+    href: "https://payments-na2.hubspot.com/payments/x7Dv7hgdtK9x",
+  },
+  {
+    label: "Square",
+    description: "Checkout powered by Square",
+    href: "https://square.link/u/vmeir8C7",
+  },
+  {
+    label: "PayPal or Venmo",
+    description: "Pay with your PayPal or Venmo balance",
+    href: "https://www.paypal.com/ncp/payment/U3LKFXDZP9BYU",
+  },
+];
 
 const actionCards = [
   {
@@ -30,9 +55,10 @@ const actionCards = [
 
 /**
  * Donate page hero — mirrors HeroSection's flower-background treatment but
- * centered, with copy about the mission and two external donate CTAs
- * (Square, PayPal/Venmo). Both links open in a new tab; no payment UI is
- * built here, we only ever link out to the real processors.
+ * centered, with copy about the mission and a single unified donation panel
+ * that groups all three processors (Credit/Debit Card, Square, PayPal/Venmo)
+ * into one cohesive "choose how to give" view. All links open in a new tab;
+ * no payment UI is built here, we only ever link out to the real processors.
  */
 export function DonateHero() {
   const { ref, revealed } = useScrollReveal({ threshold: 0.05 });
@@ -71,23 +97,44 @@ export function DonateHero() {
             Your gift makes this work possible.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="https://square.link/u/vmeir8C7"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={yellowButtonClasses}
-            >
-              Donate With Square
-            </a>
-            <a
-              href="https://www.paypal.com/ncp/payment/U3LKFXDZP9BYU"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={yellowButtonClasses}
-            >
-              Donate With PayPal Or Venmo
-            </a>
+          <div className="mt-8 w-full max-w-md">
+            <div className="rounded-2xl border border-brand-blue/15 bg-brand-yellow px-6 py-4 text-center">
+              <p className="text-lg font-bold uppercase tracking-[0.8px] text-brand-navy">
+                Donate Now
+              </p>
+              <p className="mt-1 text-sm text-brand-navy/80">
+                Choose your preferred way to give
+              </p>
+            </div>
+
+            <div className="divide-y divide-brand-blue/10 overflow-hidden rounded-b-2xl border border-t-0 border-brand-blue/15 bg-white text-left shadow-sm">
+              {donationMethods.map((method) => (
+                <a
+                  key={method.label}
+                  href={method.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between gap-4 px-6 py-4 transition-colors duration-200 ease-out hover:bg-brand-blue-pale/40 focus-visible:bg-brand-blue-pale/40 focus:outline-none"
+                >
+                  <span className="min-w-0">
+                    <span className="block text-base font-bold text-brand-navy">
+                      {method.label}
+                    </span>
+                    <span className="mt-0.5 block text-sm text-brand-navy/70">
+                      {method.description}
+                    </span>
+                  </span>
+                  <ChevronRight
+                    aria-hidden="true"
+                    className="h-5 w-5 shrink-0 text-brand-blue transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                  />
+                </a>
+              ))}
+            </div>
+
+            <p className="mt-3 text-sm text-brand-navy/70">
+              You&apos;ll be securely redirected to complete your gift.
+            </p>
           </div>
         </div>
       </Container>
