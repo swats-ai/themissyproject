@@ -1,5 +1,6 @@
 import { EventHeroSection } from "@/components/EventHeroSection";
 import { EventDetailsSection, EventScheduleSection } from "@/components/EventDetailsSection";
+import { EventCommunitySection } from "@/components/EventCommunitySection";
 import { EventAlternateCtaSection } from "@/components/EventAlternateCtaSection";
 
 export const metadata = {
@@ -12,6 +13,7 @@ export default function EventPage() {
       <EventHeroSection />
       <EventDetailsSection />
       <EventScheduleSection />
+      <EventCommunitySection />
       <EventAlternateCtaSection />
     </>
   );
