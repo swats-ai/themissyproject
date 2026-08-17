@@ -8,9 +8,9 @@ import { cn } from "@/lib/utils";
 import { Container } from "@/components/container";
 
 const NAV_LINKS = [
-  { label: "About", href: "/about_us" },
-  { label: "Learn", href: "/learn" },
-  { label: "What We Do", href: "/what-we-do" },
+  { label: "Mission", href: "/about_us" },
+  { label: "What is a brain aneurysm?", href: "/learn" },
+  { label: "Programs", href: "/what-we-do" },
   { label: "Events", href: "/event" },
 ];
 
@@ -52,12 +52,6 @@ export function Header() {
           >
             Donate
           </Link>
-          <Link
-            href="/contact"
-            className={cn(buttonBaseClasses, "bg-brand-blue text-white")}
-          >
-            Contact
-          </Link>
         </div>
 
         <button
@@ -97,12 +91,6 @@ export function Header() {
                 className={cn(buttonBaseClasses, "bg-brand-yellow text-brand-navy")}
               >
                 Donate
-              </Link>
-              <Link
-                href="/contact"
-                className={cn(buttonBaseClasses, "bg-brand-blue text-white")}
-              >
-                Contact
               </Link>
             </div>
           </Container>
