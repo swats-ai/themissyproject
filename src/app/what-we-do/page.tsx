@@ -389,6 +389,16 @@ export default function WhatWeDoPage() {
                 <p className="mt-2 text-base leading-[1.6] text-brand-navy">
                   {grant.body}
                 </p>
+                {grant.title ===
+                  "Developing better diagnostic methods and Imaging techniques" && (
+                  <Image
+                    src="/images/wwd-diagnostic-grant-check.webp"
+                    alt="Supporters at The Missy Project's annual charity golf tournament presenting grant checks, including a $150,000 award to the Dartmouth Neurovascular TeleHealth Network"
+                    width={1350}
+                    height={965}
+                    className="mt-4 h-auto w-full rounded-lg"
+                  />
+                )}
               </div>
             ))}
           </div>
